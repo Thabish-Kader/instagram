@@ -6,6 +6,9 @@ export const Feed = () => {
 			<section className="col-span-2">
 				<Status />
 			</section>
+
+			{/* Profile /Suggestions */}
+			<section></section>
 		</main>
 	);
 };
