@@ -2,7 +2,7 @@ import { faker } from "@faker-js/faker";
 import { useEffect, useState } from "react";
 import { Story } from "./Story";
 
-export const Stories = () => {
+export const Status = () => {
 	const [dummyUser, setdummyUser] = useState<UserData[]>([]);
 	useEffect(() => {
 		const dummyUser = [...Array(20)].map((_, i) => ({
