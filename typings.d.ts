@@ -1,4 +1,4 @@
-type Sugesstion = {
+type UserData = {
 	userId: string;
 	username: string;
 	email: string;
