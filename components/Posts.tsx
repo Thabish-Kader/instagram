@@ -10,7 +10,7 @@ export const Posts = () => {
 		},
 	];
 	return (
-		<div>
+		<div className="bg-gray-50">
 			{posts.map((post) => (
 				<SinglePost
 					key={post.id}

@@ -13,7 +13,7 @@ export const Header = () => {
 	const { data: session } = useSession();
 
 	return (
-		<header className="shadow-sm border-b bg-white sticky top-0 z-50 md:px-2">
+		<header className="shadow-sm border-b  sticky top-0 z-50 md:px-2">
 			<div className="flex justify-between items-center bg-white max-w-6xl mx-5 lg:mx-auto">
 				{/* left */}
 				<div className="relative hidden lg:inline-grid  w-24 h-24 cursor-pointer">

@@ -12,8 +12,8 @@ export const Feed = () => {
 			</section>
 
 			{/* Profile /Suggestions */}
-			<section className="hidden md:col-span-1 xl:inline-grid">
-				<div className="fixed top-32">
+			<section className="hidden md:col-span-1 xl:inline-grid ">
+				<div className="fixed top-32 bg-white shadow-md rounded-lg mx-2 px-3">
 					<MyProfile />
 					<TopProfiles />
 				</div>
