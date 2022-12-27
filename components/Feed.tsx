@@ -1,5 +1,7 @@
+import { MyProfile } from "./MyProfile";
 import { Posts } from "./Posts";
 import { Status } from "./Status";
+import { TopProfiles } from "./TopProfiles";
 
 export const Feed = () => {
 	return (
@@ -10,7 +12,12 @@ export const Feed = () => {
 			</section>
 
 			{/* Profile /Suggestions */}
-			<section></section>
+			<section className="hidden md:col-span-1 xl:inline-grid">
+				<div className="fixed top-32">
+					<MyProfile />
+					<TopProfiles />
+				</div>
+			</section>
 		</main>
 	);
 };
