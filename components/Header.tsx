@@ -8,7 +8,10 @@ import {
 } from "react-icons/bs";
 import { AiFillHome, AiOutlineUsergroupAdd } from "react-icons/ai";
 import { FiHome, FiSend } from "react-icons/fi";
+import { signIn, signOut, useSession } from "next-auth/react";
 export const Header = () => {
+	const { data: session } = useSession();
+
 	return (
 		<header className="shadow-sm border-b bg-white sticky top-0 z-50">
 			<div className="flex justify-between items-center bg-white max-w-6xl mx-5 lg:mx-auto">
@@ -44,25 +47,40 @@ export const Header = () => {
 					</div>
 				</div>
 				{/* right */}
-				<div className="flex items-center justify-end space-x-4">
-					<FiHome size={25} className="navBtn" />
-					<BsMenuUp size={25} className="inline-flex md:hidden" />
-					<div className="relative navBtn">
-						<div className="absolute -top-2 -right-2 text-xs w-5 h-5 bg-red-500 rounded-full flex items-center justify-center animate-pulse text-white">
-							3
-						</div>
-						<BsPaperclip size={25} className="navBtn" />
-					</div>
-					<BsPlus size={25} className="navBtn" />
-					<AiOutlineUsergroupAdd size={25} className="navBtn" />
-					<BsHeart size={25} className="navBtn" />
+				{session ? (
+					<>
+						<div className="flex items-center justify-end space-x-4">
+							<FiHome size={25} className="navBtn" />
+							<BsMenuUp
+								size={25}
+								className="inline-flex md:hidden"
+							/>
+							<div className="relative navBtn">
+								<div className="absolute -top-2 -right-2 text-xs w-5 h-5 bg-red-500 rounded-full flex items-center justify-center animate-pulse text-white">
+									3
+								</div>
+								<BsPaperclip size={25} className="navBtn" />
+							</div>
+							<BsPlus size={25} className="navBtn" />
+							<AiOutlineUsergroupAdd
+								size={25}
+								className="navBtn"
+							/>
+							<BsHeart size={25} className="navBtn" />
 
-					<img
-						src="https://my.kumonglobal.com/wp-content/uploads/2022/03/Learn-from-Rowan-Atkinson_Kumon-Malaysia_530x530_NewsThumbnail.jpg"
-						alt="/img"
-						className="h-10 rounded-full cursor-pointer"
-					/>
-				</div>
+							<Image
+								onClick={() => signOut()}
+								src={session?.user?.image!}
+								alt="/img"
+								height={35}
+								width={35}
+								className="rounded-full cursor-pointer"
+							/>
+						</div>
+					</>
+				) : (
+					<button onClick={() => signIn()}>Sign In</button>
+				)}
 			</div>
 		</header>
 	);
