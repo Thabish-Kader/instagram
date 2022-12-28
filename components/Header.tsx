@@ -9,14 +9,18 @@ import {
 import { AiFillHome, AiOutlineUsergroupAdd } from "react-icons/ai";
 import { FiHome, FiSend } from "react-icons/fi";
 import { signIn, signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 export const Header = () => {
 	const { data: session } = useSession();
-
+	const router = useRouter();
 	return (
 		<header className="shadow-sm border-b bg-white sticky top-0 z-50 md:px-2">
 			<div className="flex justify-between items-center bg-white max-w-6xl mx-5 lg:mx-auto">
 				{/* left */}
-				<div className="relative hidden lg:inline-grid  w-24 h-24 cursor-pointer">
+				<div
+					onClick={() => router.push("/")}
+					className="relative hidden lg:inline-grid  w-24 h-24 cursor-pointer"
+				>
 					<Image
 						src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/1280px-Instagram_logo.svg.png"
 						fill

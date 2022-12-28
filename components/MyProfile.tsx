@@ -1,4 +1,4 @@
-import { useSession } from "next-auth/react";
+import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import React from "react";
 
@@ -21,12 +21,25 @@ export const MyProfile = () => {
 
 			<div className="flex-1 mx-4">
 				<h2 className="font-bold ">{session?.user?.username}</h2>
-				<h3 className="text-sm text-gray-400">Welcome to Instagram</h3>
+				<h3 className="text-sm text-gray-400">
+					{session ? "Welcome to Instagram" : "Welcome Back"}
+				</h3>
 			</div>
-
-			<button className="text-blue-400 text-sm font-semibold">
-				Sign Out
-			</button>
+			{session ? (
+				<button
+					onClick={() => signOut()}
+					className="text-blue-400 text-sm font-semibold"
+				>
+					Sign Out
+				</button>
+			) : (
+				<button
+					onClick={() => signIn()}
+					className="text-blue-400 text-sm font-semibold"
+				>
+					Sign In
+				</button>
+			)}
 		</div>
 	);
 };
