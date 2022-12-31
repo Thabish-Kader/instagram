@@ -1,4 +1,5 @@
 import { Dialog, Transition } from "@headlessui/react";
+import Image from "next/image";
 import React, { ChangeEvent, Fragment, useRef, useState } from "react";
 import { BsCamera } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,11 +12,22 @@ export const UploadImageInput = () => {
 
 	// ui for popup
 	const inputFile = useRef<HTMLInputElement>(null);
+	const captionRef = useRef<HTMLInputElement>(null);
 	const [loading, setLoading] = useState(false);
+	const [preview, setPreview] = useState<string | ArrayBuffer | null>();
 
 	const showImagePreview = (e: ChangeEvent<HTMLInputElement>) => {
+		const reader = new FileReader();
 		const file = e?.target?.files?.[0];
-		console.log(file);
+		if (file) {
+			reader.readAsDataURL(file);
+		}
+		reader.onload = (e) => {
+			setPreview(e.target?.result);
+		};
+	};
+	const uploadPicToFirebase = () => {
+		console.log(captionRef.current?.value);
 	};
 	return (
 		<>
@@ -59,28 +71,29 @@ export const UploadImageInput = () => {
                             sm:p-6"
 							>
 								<div>
-									{/* {selectedFile ? (
-										<img
-											className="w-full object-contain cursor-pointer"
+									{preview ? (
+										<picture>
+											<img
+												className="w-full object-contain cursor-pointer"
+												src={preview as string}
+												alt=""
+												onClick={() => setPreview(null)}
+											/>
+										</picture>
+									) : (
+										<div
+											className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 cursor-pointer"
 											onClick={() =>
-												setSelectedFile(null)
+												inputFile?.current?.click()
 											}
-											src={selectedFile as string}
-											alt=""
-										/>
-									) : ( */}
-									<div
-										className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 cursor-pointer"
-										onClick={() =>
-											inputFile?.current?.click()
-										}
-									>
-										<BsCamera
-											aria-hidden="true"
-											className="h-6 w-6 text-blue-600"
-										/>
-									</div>
-									{/* )} */}
+										>
+											<BsCamera
+												aria-hidden="true"
+												className="h-6 w-6 text-blue-600"
+											/>
+										</div>
+									)}
+
 									<div>
 										<div className="mt-3 text-center sm:mt-5">
 											<Dialog.Title
@@ -104,15 +117,15 @@ export const UploadImageInput = () => {
 												type="text"
 												className="border-none focus:ring-0 w-full text-center"
 												placeholder="Please enter a caption"
-												// ref={captionRef}
+												ref={captionRef}
 											/>
 										</div>
 									</div>
 									<div className="mt-5 sm:mt-6">
 										<button
 											type="button"
-											// disabled={!selectedFile}
-											// onClick={uploadPost}
+											disabled={!preview}
+											onClick={uploadPicToFirebase}
 											className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4
                                         py-2 bg-black text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500
                                         sm:text-sm disabled:bg-gray-300 disabled:cursor-not-allowed  hover:disabled:bg-gray-300"
