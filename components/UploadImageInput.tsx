@@ -1,13 +1,22 @@
 import { Dialog, Transition } from "@headlessui/react";
-import React, { Fragment, useState } from "react";
+import React, { ChangeEvent, Fragment, useRef, useState } from "react";
 import { BsCamera } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { selectpopUp, show } from "../redux/slices/popUpSlice";
 
 export const UploadImageInput = () => {
+	// reudx hooks
 	const open = useSelector(selectpopUp);
-	const [loading, setLoading] = useState(false);
 	const dispatch = useDispatch();
+
+	// ui for popup
+	const inputFile = useRef<HTMLInputElement>(null);
+	const [loading, setLoading] = useState(false);
+
+	const showImagePreview = (e: ChangeEvent<HTMLInputElement>) => {
+		const file = e?.target?.files?.[0];
+		console.log(file);
+	};
 	return (
 		<>
 			<Transition.Root appear show={open} as={Fragment}>
@@ -62,9 +71,9 @@ export const UploadImageInput = () => {
 									) : ( */}
 									<div
 										className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 cursor-pointer"
-										// onClick={() =>
-										// 	filePickerRef?.current?.click()
-										// }
+										onClick={() =>
+											inputFile?.current?.click()
+										}
 									>
 										<BsCamera
 											aria-hidden="true"
@@ -83,10 +92,10 @@ export const UploadImageInput = () => {
 
 											<div>
 												<input
-													// ref={filePickerRef}
+													ref={inputFile}
 													type="file"
 													hidden
-													// onChange={addImageToPost}
+													onChange={showImagePreview}
 												/>
 											</div>
 										</div>
