@@ -1,11 +1,22 @@
 import { Dialog, Transition } from "@headlessui/react";
-import Image from "next/image";
+import {
+	addDoc,
+	collection,
+	doc,
+	serverTimestamp,
+	setDoc,
+	updateDoc,
+} from "firebase/firestore";
+import { getDownloadURL, ref, uploadString } from "firebase/storage";
+import { useSession } from "next-auth/react";
 import React, { ChangeEvent, Fragment, useRef, useState } from "react";
 import { BsCamera } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
+import { db, storage } from "../firebase";
 import { selectpopUp, show } from "../redux/slices/popUpSlice";
 
 export const UploadImageInput = () => {
+	const { data: session } = useSession();
 	// reudx hooks
 	const open = useSelector(selectpopUp);
 	const dispatch = useDispatch();
@@ -26,8 +37,30 @@ export const UploadImageInput = () => {
 			setPreview(e.target?.result);
 		};
 	};
-	const uploadPicToFirebase = () => {
-		console.log(captionRef.current?.value);
+	const uploadPicToFirebase = async () => {
+		if (loading) return;
+		setLoading(true);
+
+		const docRef = await addDoc(collection(db, "posts"), {
+			name: session?.user.username,
+			userImg: session?.user.image,
+			caption: captionRef.current?.value,
+			timestamp: serverTimestamp(),
+		});
+		console.log(`Doc with id: ${docRef.id} -----> added`);
+		const imageRef = ref(storage, `posts/images/${docRef.id}/images`);
+		uploadString(imageRef, preview as string, "data_url").then(
+			(snapshot) => {
+				getDownloadURL(imageRef).then(async (url) => {
+					await updateDoc(doc(db, "posts", docRef.id), {
+						image: url,
+					});
+				});
+			}
+		);
+		dispatch(show(false));
+		setLoading(false);
+		setPreview(null);
 	};
 	return (
 		<>
