@@ -2,7 +2,6 @@ import { MyProfile } from "./MyProfile";
 import { Posts } from "./Posts";
 import { Status } from "./Status";
 import { TopProfiles } from "./TopProfiles";
-import { UploadImageInput } from "./UploadImageInput";
 
 export const Feed = () => {
 	return (
@@ -19,7 +18,6 @@ export const Feed = () => {
 					<TopProfiles />
 				</div>
 			</section>
-			<UploadImageInput />
 		</main>
 	);
 };

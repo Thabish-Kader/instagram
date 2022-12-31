@@ -10,9 +10,14 @@ import { AiFillHome, AiOutlineUsergroupAdd } from "react-icons/ai";
 import { FiHome, FiSend } from "react-icons/fi";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import { useDispatch, useSelector } from "react-redux";
+import { selectpopUp, show } from "../redux/slices/popUpSlice";
+
 export const Header = () => {
 	const { data: session } = useSession();
 	const router = useRouter();
+	const popUp = useSelector(selectpopUp);
+	const dispatch = useDispatch();
 	return (
 		<header className="shadow-sm border-b bg-white sticky top-0 z-50 md:px-2">
 			<div className="flex justify-between items-center bg-white max-w-6xl mx-5 lg:mx-auto">
@@ -65,7 +70,11 @@ export const Header = () => {
 								</div>
 								<BsPaperclip size={25} className="navBtn" />
 							</div>
-							<BsPlus size={25} className="navBtn" />
+							<BsPlus
+								onClick={() => dispatch(show(!popUp))}
+								size={25}
+								className="navBtn"
+							/>
 							<AiOutlineUsergroupAdd
 								size={25}
 								className="navBtn"

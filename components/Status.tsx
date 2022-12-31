@@ -16,7 +16,6 @@ export const Status = () => {
 			registeredAt: faker.date.past(),
 		}));
 		setdummyUser(dummyUser);
-		console.log(dummyUser);
 	}, []);
 	const { data: session } = useSession();
 	return (
