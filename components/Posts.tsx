@@ -24,7 +24,7 @@ export const Posts = () => {
 		});
 		return () => unsub();
 	}, [db]);
-	// console.log(posts);
+	console.log(posts);
 	return (
 		<div className="bg-gray-50">
 			{posts.map((post) => (
