@@ -16,3 +16,11 @@ type Post = {
 	timeStamp: Date;
 	userImg: string;
 };
+
+type PostComment = {
+	id: string;
+	comment: string;
+	timestamp: int;
+	userImg: string;
+	username: string;
+};
