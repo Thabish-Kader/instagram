@@ -44,6 +44,7 @@ export const Posts = () => {
 					username={post.name}
 					img={post.image}
 					caption={post.caption}
+					userImg={post.userImg}
 				/>
 			))}
 		</div>

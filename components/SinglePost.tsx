@@ -12,15 +12,16 @@ type Props = {
 	username: string;
 	img: string;
 	caption: string;
+	userImg: string;
 };
 
-export const SinglePost = ({ id, username, img, caption }: Props) => {
+export const SinglePost = ({ id, username, img, caption, userImg }: Props) => {
 	return (
 		<div className="bg-white my-7 border rounded-sm">
 			{/* header */}
 			<div className="flex items-center p-5">
 				<img
-					src="https://my.kumonglobal.com/wp-content/uploads/2022/03/Learn-from-Rowan-Atkinson_Kumon-Malaysia_530x530_NewsThumbnail.jpg"
+					src={userImg}
 					alt=""
 					className="rounded-full h-12 w-12 object-contain border p-1 mr-3"
 				/>
