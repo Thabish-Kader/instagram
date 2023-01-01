@@ -16,6 +16,7 @@ type Props = {
 };
 
 export const SinglePost = ({ id, username, img, caption, userImg }: Props) => {
+	console.log(id);
 	return (
 		<div className="bg-white my-7 border rounded-sm">
 			{/* header */}

@@ -7,3 +7,12 @@ type UserData = {
 	password: string;
 	registeredAt: Date;
 };
+
+type Post = {
+	id: string;
+	caption: string;
+	image: string;
+	name: string;
+	timeStamp: Date;
+	userImg: string;
+};

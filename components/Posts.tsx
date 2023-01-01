@@ -8,14 +8,7 @@ import {
 import { useEffect, useState } from "react";
 import { db } from "../firebase";
 import { SinglePost } from "./SinglePost";
-type Post = {
-	id: string;
-	caption: string;
-	image: string;
-	name: string;
-	timeStamp: Date;
-	userImg: string;
-};
+
 export const Posts = () => {
 	const [posts, setPosts] = useState<Post[]>([]);
 	const dummyPosts = [
@@ -30,7 +23,12 @@ export const Posts = () => {
 	useEffect(() => {
 		const q = query(collection(db, "posts"), orderBy("timestamp", "desc"));
 		const unsub = onSnapshot(q, (snapshot) => {
-			setPosts(snapshot.docs.map((doc) => doc.data()) as Post[]);
+			setPosts(
+				snapshot.docs.map((doc) => ({
+					...doc.data(),
+					id: doc.id,
+				})) as Post[]
+			);
 		});
 		return () => unsub();
 	}, [db]);
