@@ -19,6 +19,10 @@ export const Like = ({ id }: Props) => {
 	const { data: session } = useSession();
 
 	const likedPost = async () => {
+		if (!session) {
+			alert("You must sign In first");
+			return;
+		}
 		if (like) {
 			await deleteDoc(doc(db, "posts", id, "likes", session?.user?.uid!));
 		} else {
