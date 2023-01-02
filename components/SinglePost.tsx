@@ -1,5 +1,11 @@
 import { KeyLike } from "crypto";
-import { collection, onSnapshot } from "firebase/firestore";
+import {
+	collection,
+	deleteDoc,
+	doc,
+	onSnapshot,
+	setDoc,
+} from "firebase/firestore";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
@@ -63,16 +69,20 @@ export const SinglePost = ({ id, username, img, caption, userImg }: Props) => {
 
 	// for setting likes
 	useEffect(() => {
-		setLike(likes.findIndex((like) => like.id === session?.user.uid) != -1);
-	}, [like]);
-	console.log(like);
-	const likedPost = () => {
-		sendLikeToFirebase(
-			id,
-			session?.user.uid!,
-			session?.user.image!,
-			session?.user.username!
+		setLike(
+			likes?.findIndex((like) => like.id === session?.user.uid) !== -1
 		);
+	}, [likes]);
+
+	// console.log(like);
+	const likedPost = async () => {
+		if (like) {
+			await deleteDoc(doc(db, "posts", id, "likes", session?.user?.uid!));
+		} else {
+			await setDoc(doc(db, "posts", id, "likes", session?.user?.uid!), {
+				username: session?.user.username,
+			});
+		}
 	};
 
 	return (
@@ -102,7 +112,7 @@ export const SinglePost = ({ id, username, img, caption, userImg }: Props) => {
 						{like ? (
 							<BsHeartFill
 								size={25}
-								className="text-red-500"
+								className="text-red-500 btn"
 								onClick={likedPost}
 							/>
 						) : (
