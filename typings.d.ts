@@ -24,3 +24,8 @@ type PostComment = {
 	userImg: string;
 	username: string;
 };
+
+type Like = {
+	id: string;
+	username: string;
+};
