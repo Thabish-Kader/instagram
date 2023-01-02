@@ -2,6 +2,7 @@ import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "../firebase";
 import TimeAgo from "react-timeago";
+import Image from "next/image";
 
 type Props = {
 	id: string;
@@ -33,8 +34,10 @@ export const Comments = ({ id }: Props) => {
 							key={comment.id}
 							className="flex items-center space-x-2 mb-3"
 						>
-							<img
-								className="h-7 rounded-full"
+							<Image
+								height={35}
+								width={35}
+								className=" rounded-full"
 								src={comment.userImg}
 								alt=""
 							/>

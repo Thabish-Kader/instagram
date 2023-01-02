@@ -1,4 +1,3 @@
-import { KeyLike } from "crypto";
 import {
 	collection,
 	deleteDoc,
@@ -20,9 +19,9 @@ import {
 import { db } from "../firebase";
 
 import { sendCommentToFirebase } from "../lib/sendCommentToFirebase";
-import { sendLikeToFirebase } from "../lib/sendLikeToFirebase";
 
 import { Comments } from "./Comments";
+import { Like } from "./Like";
 type Props = {
 	id: string;
 	username: string;
@@ -50,41 +49,6 @@ export const SinglePost = ({ id, username, img, caption, userImg }: Props) => {
 		// console.log(`${comment} ----> Success`);
 	};
 
-	// For fetching likes
-	useEffect(() => {
-		const unsub = onSnapshot(
-			collection(db, "posts", id, "likes"),
-			(snapshot) => {
-				setLikes(
-					snapshot.docs.map((doc) => ({
-						...doc.data(),
-						id: doc.id,
-					})) as Like[]
-				);
-			}
-		);
-		return () => unsub();
-	}, [db, id]);
-	// console.log(likes);
-
-	// for setting likes
-	useEffect(() => {
-		setLike(
-			likes?.findIndex((like) => like.id === session?.user.uid) !== -1
-		);
-	}, [likes]);
-
-	// console.log(like);
-	const likedPost = async () => {
-		if (like) {
-			await deleteDoc(doc(db, "posts", id, "likes", session?.user?.uid!));
-		} else {
-			await setDoc(doc(db, "posts", id, "likes", session?.user?.uid!), {
-				username: session?.user.username,
-			});
-		}
-	};
-
 	return (
 		<div className="bg-white my-7 border rounded-sm">
 			{/* header */}
@@ -108,22 +72,7 @@ export const SinglePost = ({ id, username, img, caption, userImg }: Props) => {
 			{/* button */}
 			<div className="flex justify-between p-4">
 				<div className="flex space-x-4">
-					<div className="flex items-center space-x-2">
-						{like ? (
-							<BsHeartFill
-								size={25}
-								className="text-red-500 btn"
-								onClick={likedPost}
-							/>
-						) : (
-							<BsHeart
-								onClick={likedPost}
-								size={25}
-								className="btn"
-							/>
-						)}
-						<p>{likes?.length} likes</p>
-					</div>
+					<Like id={id} />
 					<BsChat size={25} className="btn" />
 					<BsPaperclip size={25} className="btn" />
 				</div>
