@@ -1,3 +1,7 @@
+# Instagram
+
+## Next-js, Redux, Typescript
+
 ### Problems
 
 ### Resources
@@ -18,5 +22,3 @@
 <img width="1680" alt="Screenshot 2023-01-02 at 12 10 21 PM" src="https://user-images.githubusercontent.com/76642519/210207181-a8b2be6a-af12-4083-a965-1e833ce261c3.png">
 
 <img width="1680" alt="Screenshot 2023-01-02 at 12 10 48 PM" src="https://user-images.githubusercontent.com/76642519/210207191-950fe3ab-0e49-4d2e-9e8e-6e1fa1b475fe.png">
-
-
