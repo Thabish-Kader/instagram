@@ -15,6 +15,8 @@
 
 This project is an attemp to learn concepts of headless ui and the file api.
 
+[Live Demo](https://instagram-khaki-seven.vercel.app/)
+
 ## Skills Aquired
 
 -   File Api
