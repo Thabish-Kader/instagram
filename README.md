@@ -12,7 +12,11 @@
 
 <br/>
 <br/>
-### Problems
+
+## Skills Aquired
+
+-   Uploading file
+-   Headless UI
 
 ### Resources
 
