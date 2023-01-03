@@ -13,9 +13,11 @@
 <br/>
 <br/>
 
+This project is an attemp to learn concepts of headless ui and the file api.
+
 ## Skills Aquired
 
--   Uploading file
+-   File Api
 -   Headless UI
 
 ### Resources
