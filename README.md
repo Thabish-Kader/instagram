@@ -13,7 +13,7 @@
 <br/>
 <br/>
 
-This project is an attemp to learn concepts of headless ui and the file api.
+This project is an attemp to learn concepts of headless ui and the file api. It uses Next auth for authentication, tailwind css for styling, redux for state management. Typescript for typesafety and firebase for the backend.
 
 [Live Demo](https://instagram-khaki-seven.vercel.app/)
 
@@ -21,6 +21,13 @@ This project is an attemp to learn concepts of headless ui and the file api.
 
 -   File Api
 -   Headless UI
+
+## Features
+
+-   Realtime Updates
+-   Commenting feature
+-   Like feature
+-   Authentication
 
 ### Resources
 
