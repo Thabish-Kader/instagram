@@ -1,6 +1,6 @@
 # Instagram
 
-## Next-js, Redux, Typescript
+## Next-js, Redux, Firebase
 
 <img align="left" alt="NextJS" width="30px" style="padding-right:10px;" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" />
 <img align="left" alt="TypeScript" width="30px" style="padding-right:10px;" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-plain.svg" />
@@ -8,6 +8,8 @@
 
 <img align="left" alt="Tailwind" width="30px" style="padding-right:10px;" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg" />
 <img align="left" alt="redux" width="30px" style="padding-right:10px;" src="https://cdn.worldvectorlogo.com/logos/redux.svg" />
+<img align="left" alt="firbase" width="30px" style="padding-right:10px;" src="https://seeklogo.com/images/F/firebase-logo-402F407EE0-seeklogo.com.png" />
+
 <br/>
 <br/>
 ### Problems
